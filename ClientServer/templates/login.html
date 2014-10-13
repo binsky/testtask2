@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link rel="stylesheet" href="../../static/css/style.css">
+</head>
+<body>
+    <div class="input-form">
+        <h3>Login</h3>
+        <form method="POST" action="/login/">
+            {% csrf_token %}
+            <fieldset>
+                <p><input type="email" name="email" value="" placeholder="E-mail" autofocus></p>
+                <p><input type="password" name="password" value="" placeholder="Password"></p>
+{#                <p class="remember_me">#}
+{#                    <label>#}
+{#                        <input type="checkbox" name="remember_me" id="remember_me">#}
+{#                        Remember me#}
+{#                    </label>#}
+{#                </p>#}
+                <input type="submit" name="commit" value="Login">
+                {% if error %}
+                    <aside style="color: red">{{ error }}</aside>
+                {% endif %}
+            </fieldset>
+        </form>
+    </div>
+</body>
+</html>
