@@ -1,15 +1,13 @@
 import json
-from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect
+import re
 
 
-# @login_required
 def sort(request):
     if not request.user.is_authenticated():
         return redirect('homepage')
-    import re
-    res = ''
+    # res = ''
     if request.method == 'POST' and request.is_ajax():
         res = re.findall(r"[\w'.-]+", request.POST['input'])
         try:

@@ -32,6 +32,10 @@ input:focus {
 
 input[type="submit"] { cursor: pointer; }
 
+textarea {
+    resize: none;
+}
+
 .clearfix { *zoom: 1; }
 .clearfix:before, .clearfix:after {
     content: "";
@@ -71,10 +75,6 @@ input[type="submit"] { cursor: pointer; }
     margin: -4px 0 0 -4px;
     position: absolute;
     top: 0;
-    /*-webkit-transform: rotate(45deg);*/
-    /*-moz-transform: rotate(45deg);*/
-    /*-ms-transform: rotate(45deg);*/
-    /*-o-transform: rotate(45deg);*/
     transform: rotate(45deg);
     width: 8px;
 }
@@ -95,7 +95,6 @@ input[type="submit"] { cursor: pointer; }
 }
 
 .input-form input[type="password"] {
-    /*border-top: none;*/
     border-radius: 0px 0px 3px 3px;
 }
 
