@@ -7,25 +7,36 @@
     <link rel="stylesheet" href="../../static/css/style.css">
     <script>
         $(document).ready(function(){
-            $("#sort").click(function(){
-                $.post("/sort/", {"input": $("#input").text()}, function(result){
-                    $("#output").text(result)
-                })
-            })
-        })
+            $("#sort").click(function(e){
+                var input = $("#input").val();
+                $.ajax({
+                    url : "/sort/",
+                    type : "POST",
+                    dataType: "json",
+                    data : {
+                        input :  input,
+                        csrfmiddlewaretoken: '{{ csrf_token }}'
+                    },
+                    success : function(data) {
+                        $('#output').val(data.result);
+                    },
+                    error : function(xhr,errmsg,err) {
+                        alert(xhr.status + ": " + xhr.responseText);
+                    }
+                });
+                e.preventDefault();
+            });
+        });
     </script>
 </head>
 <body>
-{#<form action="/sort/" method="POST">#}
-<form method="POST">
-    {% csrf_token %}
+<form>
     <div class="input-form">
         <h3>sort</h3>
         <a href="/logout" id="logout">logout</a>
         <fieldset>
-            <p><textarea rows="5" cols="30" name="input" id="input" autofocus placeholder="Input field"></textarea></p>
-            <p><textarea rows="5" cols="30" name="output" id="output" readonly placeholder="Output field">{{ result }}</textarea></p>
-{#            <input type="submit" value="Sort" id="sort_button">#}
+            <p><textarea rows="5" cols="30" id="input" autofocus placeholder="Input field"></textarea></p>
+            <p><textarea rows="5" cols="30" id="output" readonly placeholder="Output field"></textarea></p>
             <button id="sort">Sort</button>
         </fieldset>
     </div>
