@@ -1,11 +1,13 @@
 import json
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 
-@login_required
+# @login_required
 def sort(request):
+    if not request.user.is_authenticated():
+        return redirect('homepage')
     import re
     res = ''
     if request.method == 'POST' and request.is_ajax():
@@ -18,8 +20,6 @@ def sort(request):
         return render(request, 'sort.html')
     res = ', '.join(str(x) for x in _bubble_(res))
     return HttpResponse(json.dumps({'result': res}), content_type="application/json")
-
-
 
 
 def _bubble_(list):
