@@ -18,7 +18,7 @@
                         csrfmiddlewaretoken: '{{ csrf_token }}'
                     },
                     success : function(data) {
-                        $('#output').val(data.result);
+                        $('#output').val(data.result ? data.result : data.error);
                     },
                     error : function(xhr,errmsg,err) {
                         alert(xhr.status + ": " + xhr.responseText);
