@@ -4,30 +4,8 @@
     <meta charset="UTF-8">
     <title>Sort</title>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="../../static/js/sort.js"></script>
     <link rel="stylesheet" href="../../static/css/style.css">
-    <script>
-        $(document).ready(function(){
-            $("#sort").click(function(e){
-                var input = $("#input").val();
-                $.ajax({
-                    url : "/sort/",
-                    type : "POST",
-                    dataType: "json",
-                    data : {
-                        input :  input,
-                        csrfmiddlewaretoken: '{{ csrf_token }}'
-                    },
-                    success : function(data) {
-                        $('#output').val(data.result ? data.result : data.error);
-                    },
-                    error : function(xhr,errmsg,err) {
-                        alert(xhr.status + ": " + xhr.responseText);
-                    }
-                });
-                e.preventDefault();
-            });
-        });
-    </script>
 </head>
 <body>
 <form>
@@ -38,8 +16,12 @@
             <p><textarea rows="5" cols="30" id="input" autofocus placeholder="Input field"></textarea></p>
             <p><textarea rows="5" cols="30" id="output" readonly placeholder="Output field"></textarea></p>
             <button id="sort">Sort</button>
+            <div id="loading" class="hidden">
+                <img class="spinner" src="../../static/img/spiffygif_62x62.gif">
+            </div>
         </fieldset>
     </div>
+
 </form>
 </body>
 </html>
